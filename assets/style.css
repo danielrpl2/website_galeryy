@@ -1,0 +1,407 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+body, html{
+  margin: 0;
+  background: #1c1b1a;
+  font-family: 'Poppins', sans-serif;
+}
+h1{
+  text-align: center;
+  color:white;
+}
+.container-all{
+  width: fit-content;
+  margin: 20px auto;
+  height: auto;
+}
+.container{
+  width: calc(32% - 0px);
+  overflow:hidden;
+  height: fit-content;
+  margin:3px;
+  padding: 5px;
+  display:block;
+  position:relative;
+  float:left;
+}
+img{
+  width: 100%;
+  transition-duration: .3s;
+  max-width: 100%;
+  display:block;
+  overflow:hidden;
+  cursor:pointer;
+}
+.title{
+  position:absolute;
+  display:block;
+  cursor:pointer;
+  top: 35%;
+  display: none;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 1.6em;
+  text-shadow: 1px 5px 10px black;
+  transition-duration: .3s;
+}
+.text{
+  position:absolute;
+  top: 70%;
+  cursor:pointer;
+  max-width: 80%;
+  text-align:center;
+  left: 50%;
+  text-shadow: 1px 5px 10px black;
+  font-size: 1em;
+  display:none;
+  margin-right: -50%;
+  transition-duration: .3s;
+  transform: translate(-50%, -50%) 
+}
+.container:hover img{
+  transform: scale(1.2);
+  transition-duration: .3s;
+  filter: grayscale(50%);
+  opacity: .7;
+}
+.container:hover span{
+  color:white;
+  display: block;
+  transition-duration: .3s;
+}
+@media only screen and (max-width: 900px) {
+    .container {
+        width: calc(50% - 6px);
+    }
+}
+@media only screen and (max-width: 400px) {
+    .container {
+        width: 100%;
+    }
+}
+
+/* Navbar */
+.navbar {
+  background: #2c2a2a;
+  padding: 25px;
+  text-align: right;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.2em;
+}
+
+/* Responsive styles for navbar */
+@media only screen and (max-width: 900px) {
+  .navbar {
+    text-align: center;
+  }
+
+  .navbar a {
+    display: block;
+    margin: 10px 0;
+  }
+}
+
+/* Album styles */
+.album {
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.album .album-container {
+  width: calc(25% - 10px);
+  margin: 10px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.album img {
+  width: 100%;
+  height: auto;
+  transition-duration: 0.3s;
+  max-width: 100%;
+  display: block;
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+}
+
+.album .album-name {
+  padding: 15px;
+  color: #333;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.admin-dashboard {
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: black;
+  padding: 20px;
+  color: white;
+  height: 100vh; /* Set height to 100% of the viewport height */
+  display: flex;
+  flex-direction: column; /* Align items vertically in a column */
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+  padding: 10px; /* Add padding for better spacing */
+  transition: background-color 0.3s ease; /* Add transition effect */
+}
+
+.sidebar a:hover {
+  background-color: #555; /* Change background color on hover */
+}
+
+.judul-1{
+  background-color: rgb(115, 109, 109);
+}
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  background: #1f1e1e;
+}
+
+/* Table styles */
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #333; /* Ganti warna latar belakang sesuai preferensi Anda */
+}
+
+.admin-table th, .admin-table td {
+  padding: 15px;
+  border: 1px solid;
+  color: zwhite;
+  text-align: left;
+}
+
+.admin-table th {
+  background-color: white;
+  color: black;
+}
+.admin-table td button {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Styling for Edit and Delete buttons */
+.admin-table td .btn-success {
+  background-color: #eaff00; /* Green */
+  color: rgb(5, 5, 5);
+  padding: 10px;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.admin-table td .btn-success:hover {
+  background-color: #151701; /* Darker Green */
+  color: white;
+}
+
+.admin-table td .btn-danger {
+  background-color: #dc3545; /* Red */
+  color: white;
+}
+
+.admin-table td .btn-danger:hover {
+  background-color: #c82333; /* Darker Red */
+}
+.tombol-tambah {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #007bff; /* Biru */
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.tombol-tambah:hover {
+  background-color: #0056b3; /* Darker Blue on Hover */
+}
+
+
+
+/* Login/Register styles */
+.login-register-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-register-container h2 {
+  text-align: center;
+  color: #333;
+}
+
+.login-register-form {
+  margin-top: 20px;
+}
+
+.login-register-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.login-register-form input,textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.login-register-form button {
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-register-form button:hover {
+  background-color: #555;
+}
+
+.additional-options {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.additional-options a {
+  text-decoration: none;
+  color: #333;
+  margin-right: 10px;
+}
+
+.additional-options a:hover {
+  text-decoration: underline;
+}
+
+
+
+/* Loading */
+.custom-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Untuk membuat elemen berada di tengah vertikal */
+}
+
+.custom-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 1em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: custom-spin 1s linear infinite;
+  color: #00bfff; /* Warna biru neon */
+}
+
+@keyframes custom-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.custom-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.custom-loading-text {
+  margin-top: 10px;
+  font-size: 1.2em;
+  color: white;
+}
+
+.user-create-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-create-card {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.text-danger {
+  color: #dc3545;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+.label-text {
+  color: #ffffff; /* Warna label */
+  font-weight: bold;
+}
