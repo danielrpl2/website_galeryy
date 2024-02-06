@@ -50,10 +50,16 @@
               <div class="col-lg-4">
                 <fieldset>
                 <label>Gambar</label>
-                    <input type="file" name="lokasi" multiple style="width: 100%;" />
+                    <input type="file" name="lokasi" multiple id="preview_gambar" style="width: 100%;" />
                 </fieldset>
               </div>
-              <div class="col-lg-8">
+
+              <div class="col-lg-4">
+                <fieldset>
+                <img src="<?= base_url('assets/image_tambahan/kosong.jpg') ?>" id="gambar_load" style="width: 60%; border-radius:10px;">
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
                 <fieldset>
                   <button type="submit" id="form-submit" class="orange-button">Unggah Postingan</button>
                 </fieldset>
@@ -65,3 +71,24 @@
       </div>
     </div>
   </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  function bacaGambar(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+              $('#gambar_load').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+      }
+  }
+
+  $(document).ready(function () {
+      $("#preview_gambar").change(function () {
+          bacaGambar(this);
+      });
+  });
+</script>

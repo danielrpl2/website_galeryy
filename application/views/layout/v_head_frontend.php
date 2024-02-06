@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/frontend/css/templatemo-liberty-market.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/frontend/css/owl.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/frontend/css/animate.css">
-    <!-- <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/> -->
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 <!--
 
 TemplateMo 577 Liberty Market

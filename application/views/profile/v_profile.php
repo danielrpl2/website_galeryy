@@ -28,7 +28,8 @@
             style="border-radius: 50%; max-width: 50%; max-height: 45vh; object-fit: cover;">
           <?php endif;?>
           <h4>
-            <?= $this->session->userdata('nama_lengkap'); ?> <a href=""><i class="fa fa-cog" aria-hidden="true"></i>
+            <?= $this->session->userdata('nama_lengkap'); ?>
+             <a href="<?= base_url('profile/edit_profile') ?>" style="color: white; padding: 10px;"><i class="fa fa-pencil" aria-hidden="true"></i>
         </a> <br>
              <a
               href="<?= base_url('profile/view/' . $user_data->userid) ?>">@<?= $this->session->userdata('username'); ?>
@@ -94,10 +95,12 @@
                 <?= $postingan->judul ?> 
               </h4>
               
-              <button onclick="confirmDelete('<?= $postingan->fotoid ?>')" class="ellipsis" style="position: absolute; top: 10px; left: 10px; color: white; font-size: 15px; background-color: transparent; border: none;"><i class="fa fa-trash" aria-hidden="true"></i>
-            </button>
+             
 
-            <a href="<?=base_url('profile/edit/' . $postingan->fotoid)?>" style="position: absolute; top: 10px; right: 10px; color: white; font-size: 15px; background-color: transparent; border: none;"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <button onclick="showModal('<?= $postingan->fotoid ?>')" class="ellipsis" style="position: absolute; top: 10px; right: 10px; color: white; font-size: 15px; background-color: transparent; border: none;">
+        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+    </button>
+
             </div>
             <div class="col-lg-12">
               <div class="line-dec"></div>
@@ -158,3 +161,90 @@
         });
     }
 </script>
+
+<script>
+    function showModal(fotoid) {
+        var modal = document.getElementById('myModal');
+        modal.style.display = "block";
+
+        var deleteBtn = document.getElementById('deleteBtn');
+        deleteBtn.onclick = function() {
+            confirmDelete(fotoid);
+            modal.style.display = "none";
+        }
+
+        var editBtn = document.getElementById('editBtn');
+        editBtn.href = "<?= base_url('profile/edit/') ?>" + fotoid;
+    }
+
+    function closeModal() {
+        var modal = document.getElementById('myModal');
+        modal.style.display = "none";
+    }
+</script>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3 style="text-align: center;">Apakah Anda ingin ?</h3>
+        <div style="color: white; text-align: center; padding: 15px;">
+        <a id="deleteBtn"><i class="fa fa-trash" aria-hidden="true"></i> Hapus</a> | Atau | <a id="editBtn" style="color: white;"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+        </div>
+      
+    </div>
+</div>
+
+<style>
+  /* Modal */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 100; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: black;
+    margin: 15% auto; 
+    padding: 20px;
+    top: 10%;
+
+    border: 1px solid #888;
+    width: 60%; 
+    max-width: 600px; /* Set max width of the modal */
+}
+
+.modal-content a{
+  color: black;
+}
+
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Media Query for Responsive Layout */
+@media screen and (max-width: 768px) {
+    .modal-content {
+        margin: 10% auto;
+        width: 80%; /* Adjust modal width for smaller screens */
+    }
+}
+
+</style>

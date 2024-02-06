@@ -12,11 +12,19 @@ class Profile extends CI_Controller
         $this->load->model('m_like');
         $this->load->model('m_foto');
         $this->load->model('m_album');
+        $this->load->library('upload');
+
         // Load model dan library yang dibutuhkan
     }
 
     public function index()
     {
+        
+        if (!$this->session->userdata('userid')) {
+            // If user is not logged in, redirect to login page
+            redirect('login');
+        }
+        
         // Ambil data pengguna yang sudah login dari session atau sesuai kebutuhan
         $userid = $this->session->userdata('userid');
         $user_data = $this->m_user->get_data($userid);
@@ -119,6 +127,11 @@ class Profile extends CI_Controller
     
     public function add()
     {
+        
+        if (!$this->session->userdata('userid')) {
+            // If user is not logged in, redirect to login page
+            redirect('login');
+        }
 
         $this->form_validation->set_rules('judul', 'Judul', 'required', array('required' => '%s Harus Diisi !!!'));
         $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required', array('required' => '%s Harus Diisi !!!'));
@@ -164,6 +177,7 @@ class Profile extends CI_Controller
         $data = array(
             'title' => 'Tambah Postingan',
             'header' => 'Postingan',
+            'foto' => $this->m_foto->get_all_data(),
             'album' => $this->m_album->get_all_data(),
             'isi' => 'profile/v_add',
         );
@@ -174,6 +188,7 @@ class Profile extends CI_Controller
     public function edit($fotoid = null)
     {
         $foto = $this->m_foto->get_data($fotoid);
+
         $this->form_validation->set_rules('judul', 'Judul', 'required', array(
             'required' => '%s Harus Diisi !!!',
         ));
@@ -239,6 +254,22 @@ class Profile extends CI_Controller
         }
     }
 
+    private function upload_image_user()
+    {
+        $config['upload_path'] = './assets/image_user/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|ico|jfif|web';
+        $config['max_size'] = '10000';
+        $this->upload->initialize($config);
+        $field_name = "image";
+
+        if (!$this->upload->do_upload($field_name)) {
+            return ''; // Return string kosong jika upload gagal
+        } else {
+            $upload_data = $this->upload->data();
+            return $upload_data['file_name']; // Return nama file jika upload berhasil
+        }
+    }
+
     public function delete($fotoid = null)
     {
         try {
@@ -268,5 +299,73 @@ class Profile extends CI_Controller
         // Redirect to the blog page
         redirect('profile');
     }
+    
+
+    public function edit_profile()
+{
+    // Ambil userid dari sesi
+    $userid = $this->session->userdata('userid');
+    $user = $this->m_user->get_data($userid);
+
+    // Set aturan validasi untuk form
+    $this->form_validation->set_rules('username', 'Username', 'required');
+    $this->form_validation->set_rules('password', 'Password', 'required');
+    $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+    $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
+    $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+
+    if ($this->form_validation->run() == true) {
+        // Form validation sukses, update data user
+        $data = array(
+            'userid' => $userid,
+            'username' => $this->input->post('username'),
+            'password' => $this->input->post('password'),
+            'email' => $this->input->post('email'),
+            'nama_lengkap' => $this->input->post('nama_lengkap'),
+            'alamat' => $this->input->post('alamat'),
+        );
+
+        // Periksa apakah ada file gambar yang diunggah
+        if ($_FILES['image']['name'] != '') {
+            // Hapus gambar lama dari folder
+            if ($user->image != '' && file_exists('./assets/image_user/' . $user->image)) {
+                unlink('./assets/image_user/' . $user->image);
+            }
+            // Upload gambar baru
+            $data['image'] = $this->upload_image_user();
+        } else {
+            // Gunakan nama gambar lama jika tidak ada file gambar yang diunggah
+            $data['image'] = $user->image;
+        }
+
+        $this->m_user->edit($userid, $data);
+        $this->update_session_user_data($data);
+
+        $this->session->set_flashdata('swal', 'success');
+        $this->session->set_flashdata('pesan', 'Data Berhasil Diedit !!!');
+        redirect('profile');
+    }
+
+    // Jika validasi gagal, kembali ke halaman edit profile dengan error message
+    $data = array(
+        'title' => 'Edit Profile',
+        'header' => 'Edit Profile',
+        'user' => $this->m_user->get_data($userid), // Ambil data user yang akan diedit
+        'isi' => 'profile/v_edit_profile', // Sesuaikan dengan view halaman edit profile
+    );
+    $this->load->view('layout/v_wrapper_frontend', $data, false);
+}
+
+
+private function update_session_user_data($data)
+{
+    $this->session->set_userdata('username', $data['username']);
+    $this->session->set_userdata('nama_lengkap', $data['nama_lengkap']);
+    $this->session->set_userdata('password', $data['password']);
+    $this->session->set_userdata('email', $data['email']);
+    $this->session->set_userdata('alamat', $data['alamat']);
+    $this->session->set_userdata('image', $data['image']);
+    // Perbarui informasi lainnya sesuai kebutuhan
+}
 
 }

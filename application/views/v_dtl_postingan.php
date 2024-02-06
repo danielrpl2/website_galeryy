@@ -64,8 +64,12 @@
             <form action="<?= base_url('welcome/add_comment') ?>" method="post">
               <input type="hidden" name="fotoid" value="<?= $foto->fotoid ?>">
 
+              <?php if ($this->session->userdata('userid') == "") { ?>
               <textarea class="form-control" rows="4" placeholder="Tulis komentar Anda di sini..."
                 name="komentar" required></textarea>
+                <?php } else{ ?>
+                  <h4 style="text-align: center;">! Login Dulu Jika Ingin Berkomentar</h4>
+                  <?php } ?>
 
               <div class="justify-content-between align-items-center mt-3">
                 <?php if ($level_user == 1 || $level_user == 2) : ?>
@@ -110,7 +114,10 @@
                     </i></a>
                 <?php endif; ?>
 
+                <?php if ($this->session->userdata('userid') == "") { ?>
                 <button type="submit" style=" margin-left: 20px;" class="btn btn-primary">Kirim Komentar</button>
+                <?php } else{ ?>
+                  <?php } ?>
               </div>
             </form>
 

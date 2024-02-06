@@ -18,7 +18,7 @@
             <div class="item">
               <div class="thumb">
                 <img src="<?=base_url('assets/image_foto/' . $value->lokasi)?>" alt=""
-                  style="max-width: 90%; height: 50vh; border-radius: 20px; object-fit: cover;">
+                  style="max-width: 90%; height: 50vh; margin-left: 18px; border-radius: 20px; object-fit: cover;">
                 <div class="hover-effect">
                   <div class="content">
                     <h4>
@@ -52,40 +52,21 @@
       <div class="col-lg-5">
         <div class="section-heading">
           <div class="line-dec"></div>
-          <h2>Discover Some Of Our <em>Items</em>.</h2>
+          <h2>Postingan Semua <em>User</em>.</h2>
         </div>
       </div>
 
       <div class="col-lg-7">
         <form id="search-form" name="gs" method="submit" role="search" action="#">
           <div class="row">
+          
             <div class="col-lg-4">
+             
+            </div>
+            <div class="col-lg-6">
               <fieldset>
-                <input type="text" name="keyword" class="searchText" placeholder="Type Something..." autocomplete="on"
+                <input type="text" name="keyword" class="searchText" placeholder="Cari Foto..." autocomplete="on"
                   required>
-              </fieldset>
-            </div>
-            <div class="col-lg-3">
-              <fieldset>
-                <select name="Category" class="form-select" aria-label="Default select example" id="chooseCategory"
-                  onchange="this.form.click()">
-                  <option selected>All Categories</option>
-                  <option type="checkbox" name="option1" value="Music">Music</option>
-                  <option value="Digital">Digital</option>
-                  <option value="Blockchain">Blockchain</option>
-                  <option value="Virtual">Virtual</option>
-                </select>
-              </fieldset>
-            </div>
-            <div class="col-lg-3">
-              <fieldset>
-                <select name="Price" class="form-select" aria-label="Default select example" id="chooseCategory"
-                  onchange="this.form.click()">
-                  <option selected>Available</option>
-                  <option value="Ending-Soon">Ending Soon</option>
-                  <option value="Coming-Soon">Coming Soon</option>
-                  <option value="Closed">Closed</option>
-                </select>
               </fieldset>
             </div>
             <div class="col-lg-2">
@@ -98,7 +79,7 @@
       </div>
 
       <?php foreach ($foto as $key => $value) {?>
-      <div class="col-lg-3">
+      <div class="col-lg-4">
         <div class="item">
           <div class="row">
             <div class="col-lg-12">
@@ -106,7 +87,7 @@
                 <img src="<?=base_url('assets/image_user/' . $value->image)?>" alt=""
                   style="max-width: 50px; height: 48px; border-radius: 50%; object-fit: cover;">
               </span>
-              <img src="<?=base_url('assets/image_foto/' . $value->lokasi)?>" alt="" style="border-radius: 20px;">
+              <img src="<?=base_url('assets/image_foto/' . $value->lokasi)?>" alt="" style="border-radius: 20px; object-fit: cover;">
               <h4>
                 <?=$value->judul?>
               </h4>

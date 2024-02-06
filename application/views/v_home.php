@@ -30,73 +30,8 @@
     </div>
   </div>
   <!-- ***** Main Banner Area End ***** -->
-  
-  <div class="categories-collections">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="collections">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="section-heading">
-                  <div class="line-dec"></div>
-                  <h2>Postingan <em>Populer</em> Hari Ini.</h2>
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <div class="owl-collection owl-carousel">
-                  <div class="item">
-                    <img src="<?= base_url() ?>assets/frontend/images/collection-01.jpg" alt="">
-                    <div class="down-content">
-                      <h4>Mutant Bored Ape Yacht Club</h4>
-                      <span class="collection">Items In Collection:<br><strong>310/340</strong></span>
-                      <span class="category">Category:<br><strong>Digital Crypto</strong></span>
-                      <div class="main-button">
-                        <a href="explore.html">Explore Mutant</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <img src="<?= base_url() ?>assets/frontend/images/collection-01.jpg" alt="">
-                    <div class="down-content">
-                      <h4>Bored Ape Kennel Club</h4>
-                      <span class="collection">Items In Collection:<br><strong>324/324</strong></span>
-                      <span class="category">Category:<br><strong>Visual Art</strong></span>
-                      <div class="main-button">
-                        <a href="explore.html">Explore Bored Ape</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <img src="<?= base_url() ?>assets/frontend/images/collection-01.jpg" alt="">
-                    <div class="down-content">
-                      <h4>Genesis Collective Statue</h4>
-                      <span class="collection">Items In Collection:<br><strong>380/394</strong></span>
-                      <span class="category">Category:<br><strong>Music Art</strong></span>
-                      <div class="main-button">
-                        <a href="explore.html">Explore Genesis</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <img src="<?= base_url() ?>assets/frontend/images/collection-01.jpg" alt="">
-                    <div class="down-content">
-                      <h4>Worldwide Artwork Ground</h4>
-                      <span class="collection">Items In Collection:<br><strong>426/468</strong></span>
-                      <span class="category">Category:<br><strong>Blockchain</strong></span>
-                      <div class="main-button">
-                        <a href="explore.html">Explore Worldwide</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+
 
 
   <div class="currently-market">
