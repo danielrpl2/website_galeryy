@@ -10,6 +10,22 @@ class M_album extends CI_Model
         $this->db->order_by('albumid', 'desc');
         return $this->db->get()->result();
     }
+    
+    public function get_all_data_foto($albumid)
+{
+    $this->db->select('*');
+    $this->db->from('tbl_foto'); // Adjust the table name according to your database schema
+    $this->db->where('albumid', $albumid);
+    return $this->db->get()->result();
+}
+
+    public function album($albumid)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_album');
+        $this->db->where('albumid', $albumid);
+        return $this->db->get()->row(); 
+    }
 
     public function add($data)
     {

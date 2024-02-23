@@ -62,4 +62,32 @@ class M_komentar extends CI_Model
         $this->db->delete('tbl_komentar');
     }
 
+    public function get_total_comments($fotoid)
+    {
+        $this->db->select('COUNT(*) as total_coment_id');
+        $this->db->from('tbl_komentar');
+        $this->db->where('fotoid', $fotoid);
+        $query = $this->db->get();
+        $result = $query->row();
+
+        // Mengembalikan total jumlah like
+        return $result->total_coment_id;
+    }
+
+
+    public function get_most_commented_photos($limit = 5)
+{
+    $this->db->select('f.*, a.*, COUNT(k.komentarid) as total_comments');
+    $this->db->from('tbl_foto f');
+    $this->db->join('tbl_album a', 'a.albumid = f.albumid');
+    $this->db->join('tbl_komentar k', 'f.fotoid = k.fotoid', 'left');
+    $this->db->group_by('f.fotoid');
+    $this->db->order_by('total_comments', 'DESC');
+    $this->db->limit($limit);
+
+    $query = $this->db->get();
+    return $query->result();
+}
+
+
 }

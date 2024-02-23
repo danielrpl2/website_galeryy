@@ -1,5 +1,5 @@
  <!-- ***** Preloader Start ***** -->
- <div id="js-preloader" class="js-preloader">
+ <!-- <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
       <span class="dot"></span>
       <div class="dots">
@@ -8,7 +8,7 @@
         <span></span>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- ***** Preloader End ***** -->
 
   <!-- ***** Header Area Start ***** -->
@@ -19,7 +19,15 @@
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="<?= base_url() ?>" class="logo">
-                        <img src="<?= base_url() ?>assets/frontend/images/logo.png" alt="">
+                    <?php foreach ($logo as $logo) : ?>
+    <img src="<?= base_url('assets/image_logo/' . $logo->logo) ?>" alt="" width="223" height="66">
+<?php endforeach; ?>
+</a>
+
+                    <a href="<?= base_url() ?>" class="logo">
+                    <!-- <?php foreach ($logo as $logo) : ?>
+                        <img src="<?= base_url('assets/image_logo/' . $logo->logo) ?>" alt="" style="color: black;">
+                        <?php endforeach; ?> -->
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->

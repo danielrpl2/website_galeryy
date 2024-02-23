@@ -14,7 +14,7 @@
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url() ?>assets/frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-
+    <link rel="icon" href="<?= base_url() ?>assets/frontend/images/title.png" type="image/x-icon">
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/frontend/css/fontawesome.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/frontend/css/templatemo-liberty-market.css">

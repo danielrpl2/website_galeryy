@@ -78,6 +78,7 @@ header, nav, section, article, aside, footer, hgroup {
 
 html, body {
   font-family: 'Roboto', sans-serif;
+  /* font-family: Georgia, 'Times New Roman', Times, serif; */
   font-weight: 400;
   background-color: #1e1e1e;
   font-size: 16px;
@@ -121,6 +122,7 @@ html,
 body {
   background: #fff;
   font-family: 'Roboto', sans-serif;
+  /* font-family: Georgia, 'Times New Roman', Times, serif; */
 }
 
 ::selection {
@@ -727,7 +729,7 @@ Banner Style
 --------------------------------------------- 
 */
 
-.main-banner {
+/* .main-banner {
   background-image: url(../images/banner-bg.jpg);
   background-repeat: no-repeat;
   background-position: center center;
@@ -735,7 +737,7 @@ Banner Style
   padding-top: 290px;
   padding-bottom: 240px;
   background-color: #2a2a2a;
-}
+} */
 
 .main-banner h6 {
   font-size: 20px;
@@ -840,7 +842,7 @@ Categories & Collections Style
   position: relative;
 }
 
-.categories .item .icon {
+/* .categories .item .icon {
   width: 62px;
   height: 62px;
   display: inline-block;
@@ -848,11 +850,11 @@ Categories & Collections Style
   line-height: 62px;
   background-color: #fff;
   border-radius: 50%;
-}
+} */
 
-.categories .item .icon img {
+/* .categories .item .icon img {
   max-width: 31px;
-}
+} */
 
 .categories .item h4 {
   margin-top: 15px;
@@ -935,10 +937,10 @@ Categories & Collections Style
   text-align: center;
 }
 
-.collections .item .main-button {
+/* .collections .item .main-button {
   margin-top: 20px;
   margin-bottom: -60px;
-}
+} */
 
 .collections .item .main-button a:hover {
   background-color: #fff;
@@ -1259,7 +1261,7 @@ Page Heading Style
 .normal-space {
   padding: 250px 0px 120px 0px !important;
 }
-
+/* 
 .page-heading {
   background-image: url(../images/heading-bg.jpg);
   background-repeat: no-repeat;
@@ -1268,7 +1270,7 @@ Page Heading Style
   padding-top: 250px;
   text-align: center;
   background-color: #2a2a2a;
-}
+} */
 
 .page-heading h6 {
   font-size: 20px;

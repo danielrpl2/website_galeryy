@@ -16,6 +16,18 @@ class M_profile extends CI_Model
         return $result->total_likes_user;
     }
 
+    public function get_total_postingan_per_user($userid)
+    {
+        $this->db->select('COUNT(*) as total_postingan_user');
+        $this->db->from('tbl_foto');
+        $this->db->where('userid', $userid);
+        $query = $this->db->get();
+        $result = $query->row();
+
+        // Mengembalikan total jumlah like per user
+        return $result->total_postingan_user;
+    }
+
     public function get_fotos_with_likes_by_userid($userid, $fotoid)
     {
         $this->db->select('COUNT(*) as total_likes');

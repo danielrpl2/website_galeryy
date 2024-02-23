@@ -7,7 +7,7 @@
           <div class="section-heading">
             <div class="line-dec"></div>
             <h2>Form Tambah <em><?= $header ?></em>.</h2>
-            <h2><em><a href="<?= base_url('profile') ?>">Kembali</a></em>.</h2>
+            <h2><em><i class="fa fa-arrow-right"></i> <a style="color: white;" href="<?= base_url('profile') ?>">Kembali</a> <i class="fa fa-arrow-left"></i></em></h2>
           </div>
         </div>
         <div class="col-lg-12">

@@ -16,6 +16,7 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link rel="icon" href="<?= base_url() ?>assets/frontend/images/title.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
@@ -55,26 +56,8 @@
                   </div>
 
                
-                  <div class="row g-3 needs-validation">
-                  <?php 
-                echo validation_errors('<div class="alert alert-warning alert-dismissible">                   
-                <h5><i class="icon fas fa-exclamation-triangle"></i> Nontifications!</h5>', '</div>');
+                  <form class="row g-3 needs-validation" action="<?= base_url('login') ?>" method="post" enctype="multipart/form-data">
 
-                if ($this->session->flashdata('error')) {
-                      echo '<div class="alert alert-danger alert-dismissible">
-                      <h5><i class="icon fas fa-ban"></i> Nontifications!</h5>';
-                      echo $this->session->flashdata('error');
-                      echo '</div>';
-                }
-
-                if ($this->session->flashdata('pesan')) {
-                      echo '<div class="alert alert-success alert-dismissible">
-                    
-                      <h5><i class="icon fas fa-check"></i>Succes!!</h5>';
-                      echo $this->session->flashdata('pesan');
-                      echo '</div>';
-                }
-                echo form_open('login') ?>  
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
                       <div class="input-group has-validation">
@@ -93,11 +76,10 @@
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
-                    <?php echo form_close() ?>
                     <div class="col-12">
                       <p class="small mb-0">Belum punya akun? <a href="<?= base_url('login/register') ?>">Buat akun</a></p>
                     </div>
-                  </div>
+                  </form>
 
                 </div>
               </div>

@@ -17,8 +17,9 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Deskripsi</label>
                         <div class="col-sm-10">
-                            <input type="textarea" name="deskripsi" value="<?= set_value('deskripsi') ?>"
-                                class="form-control" />
+                            <textarea name="deskripsi" class="form-control" id="" cols="30" rows="5"><?= set_value('deskripsi') ?></textarea>
+                            <!-- <input type="textarea" style="height: 100px" name="deskripsi" value="<?= set_value('deskripsi') ?>"
+                                class="form-control" /> -->
                         </div>
                     </div>
                     <div class="row mb-3">

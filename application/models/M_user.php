@@ -11,6 +11,15 @@ class M_user extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function get_data_by_level($level_user)
+{
+    $this->db->select('*');
+    $this->db->from('tbl_user');
+    $this->db->where('level_user', $level_user);
+    return $this->db->get()->result();
+}
+
+
     public function add($data)
     {
         $this->db->insert('tbl_user', $data);

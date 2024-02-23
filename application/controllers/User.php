@@ -13,14 +13,32 @@ class User extends CI_Controller
 
     public function index()
     {
+        // Ambil data pengguna berdasarkan level_user
+        $user_level_1 = $this->m_user->get_data_by_level(1);
+    
         $data = array(
-            'title' => 'User',
-            'user' => $this->m_user->get_all_data(),
-            'isi' => 'user/v_user',
+            'title' => 'Admin',
+            'user_level_1' => $user_level_1,
+            'isi' => 'user/v_user_admin',
         );
+    
         $this->load->view('layout/v_wrapper_backend', $data, false);
     }
 
+    public function pengguna()
+    {
+        // Ambil data pengguna berdasarkan level_user
+        $user_level_2 = $this->m_user->get_data_by_level(2);
+    
+        $data = array(
+            'title' => 'Pengguna',
+            'user_level_2' => $user_level_2,
+            'isi' => 'user/v_user_pengguna',
+        );
+    
+        $this->load->view('layout/v_wrapper_backend', $data, false);
+    }
+    
     public function add()
     {
         // Set aturan validasi untuk form tambah user
@@ -100,7 +118,7 @@ class User extends CI_Controller
             }
 
             $this->m_user->edit($userid, $data);
-            $this->update_session_user_data($data);
+            // $this->update_session_user_data($data);
 
             $this->session->set_flashdata('swal', 'success');
             $this->session->set_flashdata('pesan', 'Data Berhasil Diedit !!!');
@@ -111,21 +129,77 @@ class User extends CI_Controller
         $data = array(
             'title' => 'Edit User',
             'user' => $user, // Kirim data user ke view
-            'isi' => 'user/v_edit',
+            'isi' => 'user/v_edit_admin',
         );
         $this->load->view('layout/v_wrapper_backend', $data, false);
     }
 
-    private function update_session_user_data($data)
+    public function edit_pengguna($userid = null)
     {
-        $this->session->set_userdata('username', $data['username']);
-        $this->session->set_userdata('nama_lengkap', $data['nama_lengkap']);
-        $this->session->set_userdata('password', $data['password']);
-        $this->session->set_userdata('email', $data['email']);
-        $this->session->set_userdata('alamat', $data['alamat']);
-        $this->session->set_userdata('image', $data['image']);
-        // Perbarui informasi lainnya sesuai kebutuhan
+        // Ambil data user berdasarkan $userid
+        $user = $this->m_user->get_data($userid);
+
+        // Jika user tidak ditemukan, bisa ditangani sesuai kebutuhan
+
+        // Set aturan validasi untuk form
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+
+        if ($this->form_validation->run() == true) {
+            // Form validation sukses, update data user
+            $data = array(
+                'userid' => $userid,
+                'username' => $this->input->post('username'),
+                'password' => $this->input->post('password'),
+                'email' => $this->input->post('email'),
+                'nama_lengkap' => $this->input->post('nama_lengkap'),
+                'alamat' => $this->input->post('alamat'),
+                'level_user' => $this->input->post('level_user'),
+            );
+
+            // Periksa apakah ada file gambar yang diunggah
+            if ($_FILES['image']['name'] != '') {
+                // Hapus gambar lama dari folder
+                if ($user->image != '' && file_exists('./assets/image_user/' . $user->image)) {
+                    unlink('./assets/image_user/' . $user->image);
+                }
+                // Upload gambar baru
+                $data['image'] = $this->upload_image();
+            } else {
+                // Gunakan nama gambar lama jika tidak ada file gambar yang diunggah
+                $data['image'] = $user->image;
+            }
+
+            $this->m_user->edit($userid, $data);
+            // $this->update_session_user_data($data);
+
+            $this->session->set_flashdata('swal', 'success');
+            $this->session->set_flashdata('pesan', 'Data Berhasil Diedit !!!');
+            redirect('user/pengguna');
+        }
+
+        // Jika validasi gagal atau halaman dimuat pertama kali
+        $data = array(
+            'title' => 'Edit User',
+            'user' => $user, // Kirim data user ke view
+            'isi' => 'user/v_edit_pengguna',
+        );
+        $this->load->view('layout/v_wrapper_backend', $data, false);
     }
+
+    // private function update_session_user_data($data)
+    // {
+    //     $this->session->set_userdata('username', $data['username']);
+    //     $this->session->set_userdata('nama_lengkap', $data['nama_lengkap']);
+    //     $this->session->set_userdata('password', $data['password']);
+    //     $this->session->set_userdata('email', $data['email']);
+    //     $this->session->set_userdata('alamat', $data['alamat']);
+    //     $this->session->set_userdata('image', $data['image']);
+    //     // Perbarui informasi lainnya sesuai kebutuhan
+    // }
 
     private function upload_image()
     {

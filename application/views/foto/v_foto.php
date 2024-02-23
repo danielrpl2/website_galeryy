@@ -14,9 +14,9 @@
                             <tr>
                                 <th>No</th>
                                 <th>Judul</th>
-                                <th>Tanggal</th>
+                                <th>User</th>
                                 <th>Image</th>
-                                <th>Albumid</th>
+                                <th>Album</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -31,7 +31,7 @@
                                     <?= $value->judul ?>
                                 </td>
                                 <td>
-                                    <?= $value->tanggal ?>
+                                    <?= $value->username ?>
                                 </td>
                                 <td>
                                     <img src="<?= base_url('assets/image_foto/' . $value->lokasi) ?>"

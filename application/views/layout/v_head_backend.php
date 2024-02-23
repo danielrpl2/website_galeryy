@@ -12,6 +12,7 @@
   <!-- Favicons -->
   <!-- <link href="<?= base_url() ?>assets/backend/img/favicon.png" rel="icon">
   <link href="<?= base_url() ?>assets/backend/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
+  <link rel="icon" href="<?= base_url() ?>assets/frontend/images/title.png" type="image/x-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">

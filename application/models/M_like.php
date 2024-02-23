@@ -11,6 +11,11 @@ class M_like extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function get_total_likes_per_fotoid($fotoid) {
+        $this->db->where('fotoid', $fotoid);
+        return $this->db->count_all_results('tbl_like');
+    }
+    
     public function add($data)
     {
         $this->db->insert('tbl_like', $data);
@@ -88,6 +93,35 @@ class M_like extends CI_Model
         // Mengembalikan total jumlah like
         return $result->total_likes_id;
     }
+
+    // public function get_most_liked_photos_with_details($limit = 10)
+    // {
+    //     $this->db->select('f.*, a.*'); // Select semua kolom dari kedua tabel
+    //     $this->db->from('tbl_like l');
+    //     $this->db->join('tbl_foto f', 'f.fotoid = l.fotoid');
+    //     $this->db->join('tbl_album a', 'a.albumid = f.albumid');
+    //     $this->db->group_by('f.fotoid'); // Group by untuk menghindari duplikasi
+    //     $this->db->order_by('COUNT(l.fotoid)', 'DESC'); // Mengurutkan berdasarkan jumlah like
+    //     $this->db->limit($limit);
+    //     $query = $this->db->get();
+    
+    //     return $query->result();
+    // }
+    
+    public function get_most_liked_photos_with_details($limit = 5)
+    {
+        $this->db->select('f.*, a.*, COUNT(l.fotoid) as total_likes'); // Memilih semua kolom dari kedua tabel dan menghitung jumlah like
+        $this->db->from('tbl_foto f');
+        $this->db->join('tbl_album a', 'a.albumid = f.albumid');
+        $this->db->join('tbl_like l', 'f.fotoid = l.fotoid', 'left'); // Menggunakan LEFT JOIN untuk memastikan semua foto diambil
+        $this->db->group_by('f.fotoid'); // Mengelompokkan hasil berdasarkan foto
+        $this->db->order_by('total_likes', 'DESC'); // Mengurutkan hasil berdasarkan jumlah like dari yang paling banyak
+        $this->db->limit($limit); // Mengambil jumlah tertentu dari hasil
+    
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 
 }
 

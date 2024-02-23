@@ -1,4 +1,12 @@
-<div class="page-heading normal-space">
+<?php foreach ($background as $bg) : ?>
+<div class="page-heading normal-space" style="background-image: url(<?=base_url('assets/image_bg/' . $bg->bg)?>);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding-top: 250px;
+  text-align: center;
+  background-color: #2a2a2a;">
+  <?php endforeach; ?>
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -36,32 +44,29 @@
             </a>
           </h4>
         </div>
+        <br>
+        <?php if ($this->session->userdata('level_user') == 1): ?>
+    <a href="<?= base_url('dashboard') ?>" style="color: white; font-size: 20px;">[ Halaman Admin <i class="fa fa-chart-pie" aria-hidden="true"></i> ]</a>
+<?php endif; ?>
       </div>
       <div class="col-lg-6">
         <div class="right-info">
           <div class="row">
-            <div class="col-6">
+            <div class="col-12 text-center">
               <div class="info-item">
-                <i class="fa fa-heart"></i>
+              <i class="fa-solid fa-image"></i>
                 <h6>
-                  <?= $total_like ?> <em>Likes</em>
+                  <?= $total_postingan ?> <em>Postingan</em>
                 </h6>
               </div>
             </div>
-            <div class="col-6">
-              <div class="info-item">
-                <i class="fa fa-comment"></i>
-                <h6>
-                  <?= $total_komentar ?> <em>Komentar</em>
-                </h6>
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>
 
 
-      <div class="col-lg-12">
+      <div class="col-lg-12" id="photo-section">
         <div class="section-heading">
           <div class="line-dec"></div>
           <h2>
@@ -105,10 +110,39 @@
             <div class="col-lg-12">
               <div class="line-dec"></div>
               <div class="row">
-                <div class="col-6">
-                  <span>Total Like : <br> <strong> <i class="fas fa-heart"></i>
-                      <?=isset($total_likes_per_fotoid[$postingan->fotoid]) ? $total_likes_per_fotoid[$postingan->fotoid] : 0?></strong></span>
-                </div>
+              <div class="col-6">
+                        <?php if ($level_user && $level_user <= 2): ?>
+                        <!-- Letakkan di dalam loop foreach untuk setiap foto -->
+                        <?php if ($this->session->userdata('userid')): ?>
+                        <?php if ($this->m_like->isLiked($postingan->fotoid, $this->session->userdata('userid'))): ?>
+                          <button id="dislike-button-<?= $postingan->fotoid ?>" onclick="dislikePhoto(<?= $postingan->fotoid ?>)" style="background-color: transparent; border: none; color: white;"> 
+                          <i class="fas fa-heart" style="color: red; font-size: 18px;"></i>
+                          <p><?=isset($total_likes_per_fotoid[$postingan->fotoid]) ? $total_likes_per_fotoid[$postingan->fotoid] : 0?></p>
+                        </button>
+                        <?php else: ?>
+                          <button id="like-button-<?= $postingan->fotoid ?>" onclick="likePhoto(<?= $postingan->fotoid ?>)" style="background-color: transparent; border: none; color: white;">
+                          <i class="fas fa-heart" style="color: white; font-size: 18px;"></i>
+                          <p><?=isset($total_likes_per_fotoid[$postingan->fotoid]) ? $total_likes_per_fotoid[$postingan->fotoid] : 0?></p>
+                        </button>
+
+                        <?php endif;?>
+                        <?php else: ?>
+                        <a href="<?=base_url('login')?>" style="text-decoration: none; color: white;">
+                          <i class="fas fa-heart" style="color: white;"></i>
+                          <p>
+                            <?=isset($total_likes_per_fotoid[$postingan->fotoid]) ? $total_likes_per_fotoid[$postingan->fotoid] : 0?>
+                          </p>
+                        </a>
+                        <?php endif;?>
+                        <?php else: ?>
+                        <a href="<?=base_url('login')?>" style="text-decoration: none; color: white;">
+                          <i class="fas fa-heart" style="color: white;"></i>
+                          <p>
+                            <?=isset($total_likes_per_fotoid[$postingan->fotoid]) ? $total_likes_per_fotoid[$postingan->fotoid] : 0?>
+                          </p>
+                        </a>
+                        <?php endif;?>
+                      </div>
                 <div class="col-6">
                   <?php
                       $days = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
@@ -192,7 +226,62 @@
       
     </div>
 </div>
+<script>
+// Fungsi untuk menangani klik tombol "like" tanpa refresh
+function likePhoto(fotoid) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '<?= base_url('profile/like_photo_profile') ?>', true); // Ganti URL dengan endpoint yang sesuai
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.status === 'success') {
+                    // Setelah like berhasil, lakukan redirect untuk memperbarui halaman
+                    window.location.reload(true);
+                } else {
+                    console.error('Failed to like photo');
+                }
+            } else {
+                console.error('Error occurred while sending request');
+            }
+        }
+    };
+    xhr.send('fotoid=' + fotoid);
+}
 
+// Fungsi untuk menangani klik tombol "dislike" tanpa refresh
+function dislikePhoto(fotoid) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '<?= base_url('profile/dislike_photo_profile') ?>', true); // Ganti URL dengan endpoint yang sesuai
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.status === 'success') {
+                    // Setelah dislike berhasil, lakukan redirect untuk memperbarui halaman
+                    window.location.reload(true);
+                } else {
+                    console.error('Failed to dislike photo');
+                }
+            } else {
+                console.error('Error occurred while sending request');
+            }
+        }
+    };
+    xhr.send('fotoid=' + fotoid);
+}
+
+function refreshPhotoSection() {
+    // Di sini, Anda dapat memperbarui bagian-bagian tertentu dari halaman, misalnya, bagian yang menampilkan foto-foto
+    // Misalnya:
+    var photoSection = document.getElementById('photo-section'); // Ganti dengan ID sesuai bagian yang ingin diperbarui
+    // Anda dapat menggunakan teknik lain seperti fetch, jQuery AJAX, atau library lainnya untuk memuat ulang bagian-bagian tertentu dari halaman.
+    // Contoh: photoSection.innerHTML = "Content to refresh"; atau load dari server
+}
+
+</script>
 <style>
   /* Modal */
 .modal {

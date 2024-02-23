@@ -14,6 +14,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Album</th>
+                                <th>Cover</th>
                                 <th>Deskripsi</th>
                                 <th colspan="2">Action</th>
                             </tr>
@@ -27,6 +28,10 @@
                                 </td>
                                 <td>
                                     <?=$value->nama_album?>
+                                </td>
+                                <td>
+                                    <img src="<?= base_url('assets/image_cover/' . $value->cover) ?>"
+                                        style="border-radius: 10px; width: 70px; text-align: center;" alt="">
                                 </td>
                                 <td>
                                     <?=$value->deskripsi?>
